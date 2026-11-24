@@ -1,0 +1,466 @@
+<a class="skip-link" href="#main"> {{ 'Skip to content' | translate }} </a>
+<header class="site-header">
+  <nav class="container nav" [attr.aria-label]="'Main navigation' | translate">
+    <a class="brand" href="#home" [attr.aria-label]="'GTG GrowTogether home' | translate"
+      ><span class="brand-emblem"
+        ><img src="assets/gtg-brand.png" alt="" width="2752" height="1536" /></span
+      ><span
+        >GrowTogether<span class="brand-caption"> {{ 'A little simpler. A lot together.' | translate }} </span></span
+      ></a
+    >
+    <div class="desktop-links">
+      <a href="#product"> {{ 'The product' | translate }} </a><a href="#why-gtg"> {{ 'Why choose GTG' | translate }} </a
+      ><a href="#how-it-works"> {{ 'How it works' | translate }} </a>
+    </div>
+    <a class="button small nav-demo" href="#demo"> {{ 'Book a demo' | translate }} <span aria-hidden="true">↗</span></a>
+    <button class="language-switch" type="button" (click)="toggleLanguage()"
+      [attr.aria-label]="i18n.currentLang() === 'en' ? 'தமிழுக்கு மாற்றவும்' : 'Switch to English'"
+      [attr.title]="i18n.currentLang() === 'en' ? 'தமிழுக்கு மாற்றவும்' : 'Switch to English'">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h12M9 2v3M5 5c1 6 4 9 9 11M13 5c-1 6-4 9-10 12M14 21l4-10 4 10M15.5 17h5"/></svg>
+      <span [attr.lang]="i18n.currentLang() === 'en' ? 'ta' : 'en'">{{ i18n.currentLang() === 'en' ? 'தமிழ்' : 'EN' }}</span>
+    </button>
+    <button
+      class="menu-button"
+      (click)="menuOpen = !menuOpen"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="mobile-nav"
+      [attr.aria-label]="'Toggle navigation' | translate"
+    >
+      ☰
+    </button>
+  </nav>
+  @if (menuOpen) {
+    <nav id="mobile-nav" class="mobile-nav" [attr.aria-label]="'Mobile navigation' | translate">
+      <a href="#product" (click)="menuOpen = false"> {{ 'The product' | translate }} </a
+      ><a href="#why-gtg" (click)="menuOpen = false"> {{ 'Why choose GTG' | translate }} </a
+      ><a href="#how-it-works" (click)="menuOpen = false"> {{ 'How it works' | translate }} </a
+      ><a href="#demo" (click)="menuOpen = false"> {{ 'Book a demo' | translate }} </a>
+    </nav>
+  }
+</header>
+<main id="main">
+  <div class="hero-stage">
+    <section id="home" class="hero container">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="status-dot"></span> {{ 'More connected. Less complicated.' | translate }} </div>
+        <h1> {{ 'Your business,' | translate }} <br /> {{ 'working together.' | translate }} </h1>
+        <p> {{ 'Sales, stock, accounts, and customer conversations.' | translate }} <br class="desktop-break" /> {{ 'Finally, one place to bring it all together.' | translate }} </p>
+        <div class="hero-actions">
+          <a class="button" href="#demo"> {{ 'Let’s grow together' | translate }} <span aria-hidden="true">↗</span></a
+          ><a class="button secondary" href="#product"
+            ><span class="play-icon" aria-hidden="true">▷</span> {{ 'Explore the product' | translate }} </a
+          >
+        </div>
+        <div class="hero-note">
+          <span aria-hidden="true">✓</span> {{ 'Built around your business' | translate }} <span class="note-separator">·</span> {{ 'Guided by real people' | translate }} </div>
+      </div>
+      <div class="margin-note" aria-hidden="true"> {{ 'A clearer view' | translate }} <br /> {{ 'of your everyday.' | translate }} <svg viewBox="0 0 90 65">
+          <path d="M8 5 Q75 0 60 52 M48 40 L60 53 L74 43" />
+        </svg>
+      </div>
+      <section id="product" class="product-window" [attr.aria-label]="'Interactive GTG product prototype' | translate">
+        <div class="window-top">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span> {{ 'Inside a growing wholesale business' | translate }} </span
+          ><span class="sample-badge"> {{ 'Illustrative business · Not actual customer results' | translate }} </span>
+        </div>
+        <div class="workspace">
+          <aside class="demo-sidebar">
+            <div class="workspace-brand">
+              <span class="brand-emblem mini-emblem"
+                ><img src="assets/gtg-brand.png" alt="" width="2752" height="1536"
+              /></span> {{ 'Kaveri Wholesale' | translate }} </div>
+            <p class="sidebar-label"> {{ 'Business tools' | translate }} </p>
+            <div class="module-nav" [attr.aria-label]="'Prototype views' | translate">
+              @for (item of views; track item.name; let i = $index) {
+                <button
+                  [class.active]="active === i"
+                  [attr.aria-pressed]="active === i"
+                  (click)="selectView(i)"
+                >
+                  <span aria-hidden="true">{{ item.icon }}</span>{{ item.name | translate }}
+                  @if (active === i) {
+                    <span class="active-dot" aria-hidden="true"></span>
+                  }
+                </button>
+              }
+            </div>
+            <div class="sidebar-bottom">
+              <span class="avatar">M</span>
+              <div> {{ 'Demo business' | translate }} <small> {{ 'Wholesale operations' | translate }} </small></div>
+              <span aria-hidden="true">⌄</span>
+            </div>
+          </aside>
+          <div class="demo-main">
+            <div class="workspace-topline">
+              <span> {{ 'Workspace' | translate }} <span aria-hidden="true">/</span> {{ view.name | translate }}</span
+              ><span class="workspace-date"> {{ 'November 2026' | translate }} <span class="avatar tiny">M</span></span>
+            </div>
+            <div class="demo-content">
+              <div class="demo-heading">
+                <div>
+                  <h2>{{ (active === 0 ? 'Big business. A clear picture.' : view.name) | translate }}</h2>
+                  <p>{{ view.description | translate }}</p>
+                </div>
+                <button class="replay" (click)="replay()" [attr.aria-label]="'Replay dashboard animation' | translate">
+                  ↻ <span> {{ 'Replay intro' | translate }} </span>
+                </button>
+              </div>
+              <div class="scenario-note"><span class="status-dot" aria-hidden="true"></span><span>{{ 'Explore an illustrative month at Kaveri Wholesale. All amounts and outcomes are examples, not customer claims.' | translate }}</span></div>
+              <div class="metrics business-metrics">
+                <article class="metric-card">
+                  <span>{{ view.metric | translate }}</span><strong>{{ view.value }}</strong>
+                  <small>{{ 'Illustrative monthly activity' | translate }}</small>
+                </article>
+                <article class="metric-card">
+                  <span>{{ (active === 2 ? 'Sales this month' : 'Purchases this month') | translate }}</span>
+                  <strong>{{ money(active === 2 ? business.sales : business.purchases) }}</strong>
+                  <button class="text-button" (click)="selectView(active === 2 ? 1 : 2)">{{ 'Explore transactions' | translate }} ↗</button>
+                </article>
+                <article class="metric-card">
+                  <span>{{ 'Payments collected' | translate }}</span><strong>{{ money(business.receipts) }}</strong>
+                  <button class="text-button" (click)="selectView(7)">{{ 'See receipts and payments' | translate }} ↗</button>
+                </article>
+                <article class="metric-card">
+                  <span>{{ 'Outstanding payments' | translate }}</span><strong>{{ money(business.outstanding) }}</strong>
+                  <small>{{ 'Know what still needs collecting' | translate }}</small>
+                </article>
+              </div>
+              @if (active === 0) {
+                <div class="dashboard-middle">
+                  <article class="sales-chart">
+                    <div class="panel-title">
+                      <h3> {{ 'A bigger business. Still in control.' | translate }} </h3>
+                      <span><i class="green-dot"></i> {{ 'Sales' | translate }} </span>
+                    </div>
+                    <div
+                      class="chart"
+                      role="img"
+                      [attr.aria-label]="'Illustrative monthly sales chart showing generally increasing sales from June through November' | translate"
+                    >
+                      <div class="chart-labels">
+                        <span>₹140L</span><span>₹70L</span><span>₹0</span>
+                      </div>
+                      <div class="chart-bars">
+                        @for (
+                          height of business.monthlySalesLakhs;
+                          track $index
+                        ) {
+                          <div
+                            class="chart-bar"
+                            [style.height.%]="height / 140 * 100"
+                            [class.dark-bar]="$index === 5"
+                          ></div>
+                        }
+                      </div>
+                    </div>
+                    <div class="chart-months">
+                      <span> {{ 'Jun' | translate }} </span><span> {{ 'Jul' | translate }} </span><span> {{ 'Aug' | translate }} </span><span> {{ 'Sep' | translate }} </span
+                      ><span> {{ 'Oct' | translate }} </span><span> {{ 'Nov' | translate }} </span>
+                    </div>
+                  </article>
+                  <article class="assistant-card">
+                    <span class="ai-symbol" aria-hidden="true">✧</span
+                    ><span class="subtle-label"> {{ 'Your next best step' | translate }} </span>
+                    <h3> {{ 'A small nudge.' | translate }} <br /> {{ 'A smarter day.' | translate }} </h3>
+                    <p> {{ '3 products are running low. Review them before your next order.' | translate }} </p>
+                    <button (click)="selectView(5)"> {{ 'Review low stock' | translate }} <span aria-hidden="true">↗</span>
+                    </button>
+                  </article>
+                </div>
+              }
+              @if (active === 0) {
+                <div class="time-scenario">
+                  <div><span class="eyebrow">{{ 'More time for your next opportunity' | translate }}</span><h3>{{ 'Less repeat work. More room to grow.' | translate }}</h3><p>{{ 'Imagine connecting an order, its stock update, and payment follow-up instead of entering the same details again.' | translate }}</p></div>
+                  <div class="time-result"><strong>{{ potentialHoursSaved }} <span>{{ 'hours / month' | translate }}</span></strong><span>{{ 'Illustrative time-saving potential' | translate }}</span></div>
+                  <p class="time-assumption">{{ 'Example only: 1,200 orders × (6 minutes manually − 2 minutes with a connected workflow) ÷ 60 = 80 hours. Assumed timings, not measured results. Actual savings and revenue depend on your business.' | translate }}</p>
+                </div>
+              }
+              @if (active === 9) {
+                <div class="ai-disclosure">
+                  <span aria-hidden="true">✧</span>
+                  <p>
+                    <strong> {{ 'Helpful suggestions. You stay in control.' | translate }} </strong><br /> {{ 'This preview illustrates AI and WhatsApp workflows. No messages are sent and no live AI service is connected.' | translate }} </p>
+                </div>
+              }
+              <div class="records-panel">
+                <div class="records-heading">
+                  <h3>{{ active === 0 ? ('Recent sales · Selected examples' | translate) : (view.name | translate) + ' · ' + ('preview' | translate) }}</h3>
+                  <label class="search"
+                    ><span aria-hidden="true">⌕</span
+                    ><input
+                      [(ngModel)]="query"
+                      [attr.aria-label]="'Search prototype records' | translate"
+                      [attr.placeholder]="'Search records' | translate"
+                      (keydown.escape)="query = ''"
+                  /></label>
+                </div>
+                <div class="table-scroll" tabindex="0" [attr.aria-label]="'Sample records' | translate">
+                  <table>
+                    <thead>
+                      <tr>
+                        @for (col of view.columns; track col) {
+                          <th scope="col">{{ col | translate }}</th>
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (row of rows; track row[0]) {
+                        <tr>
+                          <td>
+                            <button
+                              class="record-link"
+                              (click)="selectedRow = selectedRow === row ? null : row"
+                              [attr.aria-expanded]="selectedRow === row"
+                            >
+                              {{ row[0] | translate }}
+                            </button>
+                          </td>
+                          <td>{{ row[1] | translate }}</td>
+                          <td>{{ row[2] | translate }}</td>
+                          <td>
+                            <span
+                              class="badge"
+                              [class.pending]="
+                                ['Pending', 'Low stock', 'Draft', 'Ordered', 'Scheduled'].includes(
+                                  row[3]
+                                )
+                              "
+                              >{{ row[3] | translate }}</span
+                            >
+                          </td>
+                        </tr>
+                      } @empty {
+                        <tr>
+                          <td colspan="4" class="empty-state"> {{ 'No records found. Try another search.' | translate }} </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                @if (selectedRow) {
+                  <div class="record-detail" role="region" [attr.aria-label]="'Selected sample record' | translate">
+                    <strong>{{ selectedRow[0] | translate }}</strong><span
+                      >{{ selectedRow[1] | translate }} · {{ selectedRow[2] | translate }} · {{ selectedRow[3] | translate }}</span
+                    ><span> {{ 'Sample record · Read-only preview' | translate }} </span
+                    ><button class="text-button" (click)="selectedRow = null"> {{ 'Close details' | translate }} </button>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="build-cursor cursor-sales" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 2L20 14L12 15L8 22Z" /></svg><span> {{ 'Sales team' | translate }} </span>
+        </div>
+        <div class="window-footer">
+          <span><i class="status-dot"></i> {{ 'One connected business. Ten ways to explore.' | translate }} </span
+          ><a href="#demo"> {{ 'See it for your business' | translate }} <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <div class="industry-strip">
+        <p> {{ 'Different businesses. Shared ambitions.' | translate }} </p>
+        <div>
+          <span> {{ 'Retail & wholesale' | translate }} </span><i></i><span> {{ 'Service businesses' | translate }} </span><i></i
+          ><span> {{ 'Growing teams' | translate }} </span><i></i><span> {{ 'Your next chapter' | translate }} </span>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section id="solutions" class="solutions section-space">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow"> {{ 'Less switching. More doing.' | translate }} </span>
+        <h2> {{ 'All the moving parts.' | translate }} <br /> {{ 'One thoughtful system.' | translate }} </h2>
+        <p> {{ 'From your first enquiry to your final payment,' | translate }} <br class="desktop-break" /> {{ 'keep the details connected and the day moving.' | translate }} </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <div class="feature-visual sales-visual">
+            <div class="mini-document">
+              <span> {{ 'Sales invoice' | translate }} <i class="badge"> {{ 'Paid' | translate }} </i></span
+              ><strong>₹8,40,000<span>.00</span></strong>
+              <div class="document-line"></div>
+              <div class="document-line short"></div>
+              <footer><span>Modern Stores</span><span> {{ '✓ Recorded' | translate }} </span></footer>
+            </div>
+            <div class="floating-pill"> {{ '↗ A sale. A clear next step.' | translate }} </div>
+          </div>
+          <div class="feature-text">
+            <span class="feature-number"> {{ 'Sell with clarity' | translate }} </span>
+            <h3> {{ 'From “how much?”' | translate }} <br /> {{ 'to “thank you.”' | translate }} </h3>
+            <p> {{ 'Bring estimates, sales, returns, and customer records into one connected workflow.' | translate }} </p>
+            <a class="text-button" href="#product" (click)="selectView(1)"
+              > {{ 'Explore sales' | translate }} <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-visual stock-visual">
+            <div class="stock-item">
+              <span class="product-cube">▧</span>
+              <div> {{ 'Ceramic mug' | translate }} <small> {{ 'Home essentials' | translate }} </small></div>
+              <span class="stock-count"> {{ '8 left' | translate }} </span>
+            </div>
+            <div class="stock-track"><span></span></div>
+            <div class="stock-caption">
+              <span> {{ 'Reorder level: 20' | translate }} </span><span class="badge pending"> {{ 'Low stock' | translate }} </span>
+            </div>
+            <div class="stock-connected">
+              <span> {{ 'Inventory' | translate }} </span><i>↔</i><span> {{ 'Purchases' | translate }} </span><i>↔</i><span> {{ 'Orders' | translate }} </span>
+            </div>
+          </div>
+          <div class="feature-text">
+            <span class="feature-number"> {{ 'Stay a step ahead' | translate }} </span>
+            <h3> {{ 'The right stock.' | translate }} <br /> {{ 'At the right time.' | translate }} </h3>
+            <p> {{ 'Track products, purchases, returns, and reorders. See what’s moving and what needs attention.' | translate }} </p>
+            <a class="text-button" href="#product" (click)="selectView(3)"
+              > {{ 'Explore inventory' | translate }} <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-visual conversation-visual">
+            <div class="message incoming"> {{ 'Hi! Is the bulk order ready?' | translate }} <small> {{ 'Customer · 10:42 am' | translate }} </small>
+            </div>
+            <div class="message outgoing">
+              <span> {{ '✧ Suggested reply' | translate }} </span> {{ 'Your order is being prepared. I’ll share an update shortly.' | translate }} <small> {{ 'Review before sending' | translate }} </small>
+            </div>
+          </div>
+          <div class="feature-text">
+            <span class="feature-number"> {{ 'Make room for people' | translate }} </span>
+            <h3> {{ 'Fewer missed messages.' | translate }} <br /> {{ 'More conversations.' | translate }} </h3>
+            <p> {{ 'Organize enquiries and explore AI-assisted follow-ups and WhatsApp automation for your workflow.' | translate }} </p>
+            <a class="text-button" href="#product" (click)="selectView(9)"
+              > {{ 'Explore automation' | translate }} <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section id="why-gtg" class="why-section section-space">
+    <div class="container">
+      <div class="section-heading"><span class="eyebrow">{{ 'Why choose GTG' | translate }}</span><h2>{{ 'Built for your business.' | translate }}<br>{{ 'Focused on your next step.' | translate }}</h2><p>{{ 'The value is in how your team works every day: fewer disconnected records, clearer decisions, and more time for customers.' | translate }}</p></div>
+      <div class="why-grid">
+        <article class="why-item"><span class="why-icon" aria-hidden="true">↔</span><div><h3>{{ 'One connected operation' | translate }}</h3><p>{{ 'Bring sales, purchases, stock, and accounts into one workflow so your team can follow a transaction from order to payment.' | translate }}</p><a href="#product" class="text-button" (click)="selectView(0)">{{ 'Explore the connected workspace' | translate }} ↗</a></div></article>
+        <article class="why-item"><span class="why-icon" aria-hidden="true">▥</span><div><h3>{{ 'Clarity around your money' | translate }}</h3><p>{{ 'See sales, receipts, expenses, and outstanding balances together. Spot follow-ups and make informed decisions about cash flow.' | translate }}</p><a href="#product" class="text-button" (click)="selectView(7)">{{ 'Explore accounts' | translate }} ↗</a></div></article>
+        <article class="why-item"><span class="why-icon" aria-hidden="true">✧</span><div><h3>{{ 'Less repetitive work' | translate }}</h3><p>{{ 'Explore enquiry management, AI-assisted replies, and WhatsApp workflows that help your team spend less effort on routine follow-ups.' | translate }}</p><a href="#product" class="text-button" (click)="selectView(9)">{{ 'Explore automation' | translate }} ↗</a></div></article>
+        <article class="why-item"><span class="why-icon" aria-hidden="true">♧</span><div><h3>{{ 'Your workflow. A real conversation.' | translate }}</h3><p>{{ 'Discuss the modules and customization your business needs with our team. Start with a guided demo built around your priorities.' | translate }}</p><a href="#demo" class="text-button">{{ 'Talk through your requirements' | translate }} ↗</a></div></article>
+      </div>
+      <div class="why-closing"><p>{{ 'See the possibilities. Then make a plan for your business.' | translate }}</p><a href="#demo" class="button">{{ 'Book a demo' | translate }} ↗</a></div>
+    </div>
+  </section>
+  <section class="custom-section container section-space reveal">
+    <div>
+      <span class="eyebrow"> {{ 'Your business isn’t a template.' | translate }} </span>
+      <h2> {{ 'Your tools' | translate }} <br /> {{ 'shouldn’t be either.' | translate }} </h2>
+      <p> {{ 'A retailer’s day looks different from a service team’s. We work with you to shape the modules, records, and workflows around how your business actually runs.' | translate }} </p>
+      <a href="#demo" class="button secondary"
+        > {{ 'Tell us what you need' | translate }} <span aria-hidden="true">↗</span></a
+      >
+    </div>
+    <app-module-orbits></app-module-orbits>
+  </section>
+  <section id="how-it-works" class="journey section-space">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow"> {{ 'A human start to a smarter business' | translate }} </span>
+        <h2> {{ 'Let’s make it work for you.' | translate }} </h2>
+      </div>
+      <div class="steps">
+        <article class="reveal">
+          <span>01</span>
+          <h3> {{ 'Tell us about your day.' | translate }} </h3>
+          <p> {{ 'Share what you sell, how your team works, and where things get complicated.' | translate }} </p>
+        </article>
+        <article class="reveal">
+          <span>02</span>
+          <h3> {{ 'See your possibilities.' | translate }} </h3>
+          <p> {{ 'Walk through a guided demo focused on the tools your business needs.' | translate }} </p>
+        </article>
+        <article class="reveal">
+          <span>03</span>
+          <h3> {{ 'Build your way forward.' | translate }} </h3>
+          <p> {{ 'Discuss customization, setup, and the next steps with the GTG team.' | translate }} </p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="faq-section container section-space">
+    <div class="reveal">
+      <span class="eyebrow"> {{ 'A few things you might be wondering' | translate }} </span>
+      <h2> {{ 'Good questions.' | translate }} <br /> {{ 'Clear answers.' | translate }} </h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary> {{ 'Is GrowTogether right for my business?' | translate }} </summary>
+        <p> {{ 'GTG brings together sales, purchasing, stock, accounts, and customer workflows. In your demo, we’ll explore which modules fit your business and discuss any customization you need.' | translate }} </p>
+      </details>
+      <details>
+        <summary> {{ 'Can I try the application here?' | translate }} </summary>
+        <p> {{ 'Yes. The interactive prototype above has ten views with sample data. Switch modules, search records, and open their details. A guided demo can help you understand the full application.' | translate }} </p>
+      </details>
+      <details>
+        <summary> {{ 'Can you customize it for our workflow?' | translate }} </summary>
+        <p> {{ 'Yes, customization can be discussed based on your requirements. We’ll review your process and agree on scope and next steps before proceeding.' | translate }} </p>
+      </details>
+      <details>
+        <summary> {{ 'How much does it cost?' | translate }} </summary>
+        <p> {{ 'Contact us to discuss your modules, team, and customization needs. We’ll help you understand the scope and pricing for your business.' | translate }} </p>
+      </details>
+      <details>
+        <summary> {{ 'How do I book a demo?' | translate }} </summary>
+        <p> {{ 'Call either number below and ask for a GrowTogether demo. We’ll arrange a suitable time together. No online appointment is confirmed by this page.' | translate }} </p>
+      </details>
+    </div>
+  </section>
+  <section id="demo" class="demo-section">
+    <div class="container demo-cta reveal">
+      <span class="eyebrow"> {{ 'Big ambitions. A simple first step.' | translate }} </span>
+      <h2> {{ 'Let’s grow' | translate }} <br /> {{ 'something together.' | translate }} </h2>
+      <p> {{ 'Tell us about your business.' | translate }} <br /> {{ 'We’ll show you what a more connected day could look like.' | translate }} </p>
+      <div class="contact-actions">
+        <a class="button" href="tel:+916379483906"
+          > {{ 'Call to book a demo' | translate }} <span aria-hidden="true">↗</span></a
+        >
+        <div>
+          <a href="tel:+916379483906">+91 63794 83906</a
+          ><a href="tel:+919944286342">+91 99442 86342</a>
+          <a href="tel:+919994878343">+91 99948 78343</a>
+        </div>
+      </div>
+      <span class="booking-note"> {{ 'A real conversation with our team. A demo shaped around you.' | translate }} </span>
+    </div>
+    <div class="cta-decoration" aria-hidden="true">
+      <span class="brand-emblem"
+        ><img src="assets/gtg-brand.png" alt="" width="2752" height="1536"
+      /></span>
+    </div>
+  </section>
+</main>
+<footer class="site-footer container">
+  <div class="footer-top">
+    <a class="brand" href="#home"
+      ><span class="brand-emblem"
+        ><img src="assets/gtg-brand.png" alt="" width="2752" height="1536" /></span
+      ><span>GrowTogether</span></a
+    >
+    <p> {{ 'Better business begins together.' | translate }} </p>
+    <a href="#product"> {{ 'Explore the product ↗' | translate }} </a>
+  </div>
+  <div class="footer-bottom">
+    <span>© {{ year }} GTG GrowTogether. {{ 'All rights reserved.' | translate }}</span
+    ><span> {{ 'Built for the way you do business.' | translate }} </span>
+  </div>
+</footer>
+
+@if (motionAvailable) {
+  <div class="animation-controls" [attr.aria-label]="'Page animation controls' | translate">
+    @if (!animationsSkipped) {
+      <button (click)="skipAnimations()"> {{ 'Skip animation' | translate }} <kbd>Esc</kbd></button>
+    }
+    <button (click)="replayPage()" [attr.aria-label]="'Replay page assembly animation' | translate"> {{ '↻ Replay page build' | translate }} </button>
+  </div>
+}
