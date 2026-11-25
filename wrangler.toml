@@ -1,0 +1,3 @@
+name = "gtgpage"
+pages_build_output_dir = "./dist/gtg-landing/browser"
+compatibility_date = "2026-11-25"
