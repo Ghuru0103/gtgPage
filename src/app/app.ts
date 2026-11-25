@@ -40,6 +40,7 @@ export class App implements AfterViewInit, OnDestroy {
   money(value: number) { return '₹' + value.toLocaleString('en-IN'); }
   active = 0;
   menuOpen = false;
+  toggleMenu() { this.menuOpen = !this.menuOpen; }
   query = '';
   selectedRow: string[] | null = null;
   year = new Date().getFullYear();

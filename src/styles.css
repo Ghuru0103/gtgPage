@@ -2181,3 +2181,13 @@ html[lang='ta'] .why-item h3{font-size:21px}html[lang='ta'] .time-scenario h3{fo
 @media(max-width:1100px){.business-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.why-grid{gap:30px}.desktop-links{gap:20px;font-size:12px}}
 @media(max-width:767px){.business-metrics .metric-card strong{font-size:20px}.business-metrics .metric-card>span{font-size:10px}.scenario-note{font-size:9px}.time-scenario{grid-template-columns:1fr;gap:12px;padding:15px}.time-result{max-width:none;flex-direction:row;align-items:center;gap:16px}.time-result>span{max-width:110px}.why-grid{grid-template-columns:1fr;gap:28px}.why-item{gap:15px}.why-item h3{font-size:25px}.why-closing{flex-direction:column;align-items:flex-start;margin-top:32px}.why-closing p{font-size:21px}html[lang='ta'] .business-metrics{grid-template-columns:1fr}.sample-badge{white-space:normal}}
 @media(max-width:767px){.business-metrics .metric-card strong{font-size:clamp(14px,4vw,20px)}}
+
+/* Keep the header menu reachable and above the page assembly overlay. */
+.site-header { z-index: 60; }
+.menu-button { position:relative; z-index:2; color:inherit; line-height:0; }
+.menu-button svg { width:23px;height:23px;display:block; }
+.mobile-nav { position:absolute;top:100%;left:0;right:0;z-index:61;max-height:calc(100dvh - 72px);overflow-y:auto;background:#0c192d;color:#f4f7fb;border-top:1px solid #293b50;box-shadow:0 15px 28px #07111f45; }
+.mobile-nav a { display:flex;align-items:center;min-height:48px;border-radius:6px;color:#e6eef5; }
+.mobile-nav a:hover,.mobile-nav a:focus-visible { background:#ffffff12;color:#fff; }
+@media (min-width:768px) and (max-width:1100px) { .site-header .menu-button { display:block; } }
+@media (max-width:767px) { .menu-button { min-width:40px;min-height:40px;display:grid;place-items:center; } }

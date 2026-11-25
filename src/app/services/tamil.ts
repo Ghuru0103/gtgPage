@@ -278,5 +278,7 @@ export const TAMIL: Record<string, string> = {
   "Your workflow. A real conversation.": "உங்கள் பணிமுறை. நேரடியான கலந்துரையாடல்.",
   "Discuss the modules and customization your business needs with our team. Start with a guided demo built around your priorities.": "உங்கள் வணிகத்திற்குத் தேவையான பகுதிகள் மற்றும் தனிப்பயனாக்கத்தை எங்கள் குழுவுடன் கலந்துரையாடுங்கள். உங்கள் முன்னுரிமைகளுக்கு ஏற்ற செயல்விளக்கத்துடன் தொடங்குங்கள்.",
   "Talk through your requirements": "உங்கள் தேவைகளைப் பேசுங்கள்",
-  "See the possibilities. Then make a plan for your business.": "வாய்ப்புகளை அறிந்து, உங்கள் வணிகத்திற்கான திட்டத்தை அமைக்கவும்."
+  "See the possibilities. Then make a plan for your business.": "வாய்ப்புகளை அறிந்து, உங்கள் வணிகத்திற்கான திட்டத்தை அமைக்கவும்.",
+  "Open navigation": "வழிசெலுத்தலைத் திறக்கவும்",
+  "Close navigation": "வழிசெலுத்தலை மூடவும்"
 };
