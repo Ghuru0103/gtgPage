@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "npm run build && npx wrangler@4.168.0 pages deploy dist/gtg-landing/browser --project-name=gtgpage",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

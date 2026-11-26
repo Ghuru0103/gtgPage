@@ -13,6 +13,17 @@ npm start
 
 Open http://localhost:4200. Build for deployment with `npm run build`; output is `dist/gtg-landing/browser`.
 
+## Cloudflare Pages deployment
+
+This project is configured for Cloudflare Pages. In the Cloudflare Pages build settings use:
+
+- Build command: `npm run build`
+- Deploy command: `npx wrangler pages deploy dist/gtg-landing/browser --project-name=gtgpage`
+- Root directory: `/`
+- Build output directory: `dist/gtg-landing/browser`
+
+The existing `gtgpage.gtggroups25.workers.dev` URL is a separate Worker. Pages deployments publish on the Pages project's `*.pages.dev` domain.
+
 ## Content and configuration
 
 - `src/app/app.html`: landing page, FAQ, and call-to-book demo links.

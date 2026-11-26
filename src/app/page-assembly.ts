@@ -24,7 +24,7 @@ export class PageAssembly {
       '.hero-copy, .product-window, .industry-strip, .section-heading, .feature-card, .why-item, .why-closing, .custom-section, .steps article, .faq-section > div, .demo-cta, .site-footer',
     );
     targets.forEach((target, sectionIndex) => {
-      const steps = this.stepsFor(target);
+      const steps = this.pacedSteps(this.stepsFor(target));
       if (!steps.length) return;
       target.classList.add('assembly-target');
       const overlay = document.createElement('div');
@@ -45,16 +45,16 @@ export class PageAssembly {
         onComplete: () => this.restore(elements, overlay) });
       const group = { target, timeline, overlay, elements };
       this.groups.push(group);
-      const lanes = [0, .15, .3];
+      const lanes = [0, .2, .4];
       const workers = Array.from(overlay.querySelectorAll<HTMLElement>('.assembly-worker'));
       steps.forEach((step, index) => {
         const lane = index % 3;
-        const duration = step.kind === 'text' ? Math.min(1.35, .5 + (step.element.textContent?.length ?? 0) * .005) : .65;
+        const duration = step.kind === 'text' ? Math.min(1.35, .6 + (step.element.textContent?.length ?? 0) * .008) : .75;
         timeline.add(this.buildElement(target, step, workers[lane], duration), lanes[lane]);
-        lanes[lane] += duration + .27;
+        lanes[lane] += duration + .3;
       });
       timeline.to(overlay, { opacity: 0, duration: .25 }, Math.max(...lanes));
-      this.sequence!.add(timeline, sectionIndex * .16 + .15);
+      this.sequence!.add(timeline, sectionIndex * .035 + .12);
     });
     // Scale the entire schedule, including offsets and fade-outs, to one shared budget.
     // Leave a frame margin, and include setup time in the three-second limit.
@@ -63,6 +63,24 @@ export class PageAssembly {
     this.sequence.totalDuration(Math.min(this.sequence.totalDuration(), budget));
     this.deadline = setTimeout(() => this.skip(), Math.max(0, this.maxDurationMs - elapsed));
     this.sequence.play(0);
+  }
+
+  /** Keep the page build legible within its three-second total budget. */
+  private pacedSteps(steps: BuildStep[]): BuildStep[] {
+    if (steps.length <= 4) return steps;
+    const selected = new Set<BuildStep>();
+    const add = (matches: (step: BuildStep) => boolean) => {
+      const step = steps.find(candidate => !selected.has(candidate) && matches(candidate));
+      if (step) selected.add(step);
+    };
+    add(step => step.element.matches('h1,h2,h3'));
+    add(step => step.element.matches('.metric-card,.feature-visual,.chart-bar,app-module-orbits,.connected-map'));
+    add(step => step.element.matches('.hero-actions a,.custom-section .button,.contact-actions .button,tbody tr,.text-button'));
+    for (const step of steps) {
+      if (selected.size === 4) break;
+      selected.add(step);
+    }
+    return steps.filter(step => selected.has(step));
   }
 
   private stepsFor(target: HTMLElement): BuildStep[] {
