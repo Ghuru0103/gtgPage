@@ -49,7 +49,8 @@ export class PageAssembly {
       const workers = Array.from(overlay.querySelectorAll<HTMLElement>('.assembly-worker'));
       steps.forEach((step, index) => {
         const lane = index % 3;
-        const duration = step.kind === 'text' ? Math.min(1.35, .6 + (step.element.textContent?.length ?? 0) * .008) : .75;
+        const duration = step.element.matches('.hero-typewriter') ? 1.15 :
+          step.kind === 'text' ? Math.min(1.35, .6 + (step.element.textContent?.length ?? 0) * .008) : .75;
         timeline.add(this.buildElement(target, step, workers[lane], duration), lanes[lane]);
         lanes[lane] += duration + .3;
       });
@@ -73,7 +74,7 @@ export class PageAssembly {
       const step = steps.find(candidate => !selected.has(candidate) && matches(candidate));
       if (step) selected.add(step);
     };
-    add(step => step.element.matches('h1,h2,h3'));
+    add(step => step.element.matches('.hero-typewriter,h1,h2,h3'));
     add(step => step.element.matches('.metric-card,.feature-visual,.chart-bar,app-module-orbits,.connected-map'));
     add(step => step.element.matches('.hero-actions a,.custom-section .button,.contact-actions .button,tbody tr,.text-button'));
     for (const step of steps) {

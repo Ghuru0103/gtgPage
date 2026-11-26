@@ -8,6 +8,8 @@ export const TAMIL: Record<string, string> = {
   "More connected. Less complicated.": "இணைந்த செயல்பாடுகள். குறைந்த சிக்கல்கள்.",
   "Your business,": "உங்கள் வணிகம்,",
   "working together.": "இணைந்து செயல்படும்.",
+  "working and growing together.": "இணைந்து செயல்பட்டு வளர்வோம்.",
+  "Make everyday work easier.": "அன்றாடப் பணிகளை எளிதாக்குங்கள்.",
   "Sales, stock, accounts, and customer conversations.": "விற்பனை, இருப்பு, கணக்குகள், வாடிக்கையாளர் உரையாடல்கள்.",
   "Finally, one place to bring it all together.": "அனைத்தையும் இணைக்க ஒரே இடம்.",
   "Let’s grow together": "இணைந்து வளர்வோம்",
